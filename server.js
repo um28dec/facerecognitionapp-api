@@ -10,10 +10,8 @@ const image=require('./controllers/image');
 const db =knex({
   client: 'pg',
   connection: {
-    host : '127.0.0.1',
-    user : 'umangraj',
-    password : '',
-    database : 'face-app'
+    connectionString : process.env.DATABASE_URL,
+    ssl: true
   }
 });
 
