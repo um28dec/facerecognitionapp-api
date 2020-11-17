@@ -1,6 +1,5 @@
 const express = require('express');
 const bcrypt = require('bcrypt-nodejs');
-const bodyParser = require('body-parser');
 const cors = require('cors');
 const knex=require('knex');
 const register=require('./controllers/register');
@@ -12,13 +11,15 @@ const db =knex({
   client: 'pg',
   connection: {
     connectionString : process.env.DATABASE_URL,
-    ssl: true
+    ssl: {
+      rejectUnauthorized: false
+    }
   }
 });
 
 const app = express();
+app.use(express.json());
 app.use(cors());
-app.use(bodyParser.json());
 
 const database = {
 	users: [
